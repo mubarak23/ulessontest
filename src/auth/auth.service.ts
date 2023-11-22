@@ -4,7 +4,7 @@ import { Hash } from 'src/utils/hash';
 // import { MailingService } from 'src/utils/mailing/mailing.service';
 // import { MailgunMailer } from '../../utils/mailGun';
 import { ConfigService } from '../config/config.service';
-import { Users } from '../user/entity/user.entity';
+import { User } from '../user/entity/user.entity';
 import { UserService } from '../user/user.service';
 import { AuthResponse } from './auth.response';
 
@@ -19,7 +19,7 @@ export class AuthService {
     private readonly userService: UserService, //  private readonly mailingService: MailingService, //  private readonly smsMessagingService: SmsMessagingService,
   ) {}
 
-  async validateUser(payload: LoginPayload): Promise<Users> {
+  async validateUser(payload: LoginPayload): Promise<User> {
     const user = await this.userService.getUserWithPasswordByEmail(
       payload.email,
     );
@@ -55,7 +55,7 @@ export class AuthService {
   //   };
   // }
 
-  async createToken(user: Users): Promise<AuthResponse> {
+  async createToken(user: User): Promise<AuthResponse> {
     return {
       expiresIn: Number(this.configService.get('JWT_EXPIRATION_TIME')),
       accessToken: this.jwtService.sign({

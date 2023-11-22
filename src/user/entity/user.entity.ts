@@ -1,16 +1,19 @@
 /* eslint-disable prettier/prettier */
+import { Note } from 'src/note/entity/note.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { PasswordTransformer } from '../password.tranformer';
+import { UserLesson } from './user.lesson.entity';
 
 @Entity('users')
-export class Users {
+export class User {
   @PrimaryGeneratedColumn('uuid') id: string;
 
   @Column({
@@ -54,6 +57,15 @@ export class Users {
 
   @Column({ nullable: true, select: false })
   referralCode: string;
+
+  @OneToMany(() => UserLesson, (lesson) => lesson.user)
+  userlessons: UserLesson[];
+
+  @OneToMany(() => Note, (note) => note.user)
+  notes: Note[];
+
+  // @OneToMany(() => Lesson, (lesson) => lesson.id)
+  // lesson: Lesson[];
 
   @CreateDateColumn()
   createdDate: Date;

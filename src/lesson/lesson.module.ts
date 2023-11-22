@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
-import { LessonService } from './lesson.service';
+import { Lesson } from './entity/lesson.entity';
+import { LessonVideo } from './entity/lesson.video.entity';
 import { LessonController } from './lesson.controller';
+import { LessonService } from './lesson.service';
 
 @Module({
+  imports: [Lesson, LessonVideo],
   providers: [LessonService],
-  controllers: [LessonController]
+  controllers: [LessonController],
 })
 export class LessonModule {}

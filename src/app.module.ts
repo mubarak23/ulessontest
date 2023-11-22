@@ -5,13 +5,19 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { Users } from './user/entity/user.entity';
+import { User } from './user/entity/user.entity';
 import { UserModule } from './user/user.module';
 // import { Kyc, KycModule } from '../kyc';
 
 import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 import { ConfigService } from './config/config.service';
+import { Lesson } from './lesson/entity/lesson.entity';
+import { LessonVideo } from './lesson/entity/lesson.video.entity';
 import { LessonModule } from './lesson/lesson.module';
+import { Note } from './note/entity/note.entity';
+import { NoteController } from './note/note.controller';
+import { NoteModule } from './note/note.module';
+import { UserLesson } from './user/entity/user.lesson.entity';
 
 @Module({
   imports: [
@@ -26,7 +32,7 @@ import { LessonModule } from './lesson/lesson.module';
           username: configService.get('DB_USERNAME'),
           password: configService.get('DB_PASSWORD'),
           database: configService.get('DB_DATABASE'),
-          entities: [Users],
+          entities: [User, Lesson, LessonVideo, UserLesson, Note],
           synchronize: true,
         } as TypeOrmModuleAsyncOptions;
       },
@@ -35,8 +41,9 @@ import { LessonModule } from './lesson/lesson.module';
     AuthModule,
     UserModule,
     LessonModule,
+    NoteModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, NoteController],
   providers: [AppService],
 })
 export class AppModule {}

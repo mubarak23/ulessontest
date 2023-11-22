@@ -3,24 +3,24 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { randomFourDigits } from 'src/utils/helper';
 import { Repository } from 'typeorm';
 import { UserCreatePayload } from './dto/create-user.dto';
-import { Users } from './entity/user.entity';
+import { User } from './entity/user.entity';
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(Users)
-    private readonly userRepository: Repository<Users>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
 
   async get(id: string) {
     return await this.userRepository.findOne({ where: { id } });
   }
 
-  async getByEmail(email: string): Promise<Users> {
+  async getByEmail(email: string): Promise<User> {
     return await this.userRepository.findOne({ where: { email } });
   }
 
-  async getUserWithPasswordByEmail(email: string): Promise<Users> {
+  async getUserWithPasswordByEmail(email: string): Promise<User> {
     return await this.userRepository
       .createQueryBuilder('u')
       .addSelect('u.password')
@@ -28,7 +28,7 @@ export class UserService {
       .getOne();
   }
 
-  async create(payload: UserCreatePayload): Promise<Users> {
+  async create(payload: UserCreatePayload): Promise<User> {
     const userEmail = await this.getByEmail(payload.email);
 
     if (userEmail) {
