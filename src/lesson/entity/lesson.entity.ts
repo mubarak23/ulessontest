@@ -1,10 +1,13 @@
 /* eslint-disable prettier/prettier */
 import { Note } from 'src/note/entity/note.entity';
+import { UserLesson } from 'src/user/entity/user.lesson.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -32,6 +35,12 @@ export class Lesson {
     nullable: true,
   })
   numberofVideo: number;
+
+  @ManyToOne(() => UserLesson, (user) => user.lessons, {
+    eager: true,
+  })
+  @JoinColumn()
+  userLesson: UserLesson;
 
   @OneToMany(() => LessonVideo, (video) => video.lesson)
   videos: LessonVideo[];

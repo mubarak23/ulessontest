@@ -1,4 +1,8 @@
-import { Injectable, NotAcceptableException } from '@nestjs/common';
+import {
+  Injectable,
+  NotAcceptableException,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AddLessonPayload } from 'src/user/dto/add-lesson.dto';
 import { User } from 'src/user/entity/user.entity';
@@ -45,6 +49,34 @@ export class LessonService {
     return lessonExist;
   }
 
+  async myLessonExist(user: User, lessonId: string): Promise<UserLesson> {
+    const userlesson = await this.userlessonRepository.findOne({
+      where: { userId: user.id, lessonId },
+    });
+    if (!userlesson) {
+      throw new UnprocessableEntityException('Lesson Not Assign by user');
+    }
+
+    return userlesson;
+  }
+
+  async myLessons(user: User): Promise<UserLesson[]> {
+    const lessons = await this.userlessonRepository.find({
+      where: { userId: user.id },
+      relations: ['lessons'],
+    });
+    return lessons;
+  }
+
+  // myLessonandNote
+  async myLessonandNotes(user: User, lessonId: string): Promise<UserLesson> {
+    const lessons = await this.userlessonRepository.findOne({
+      where: { userId: user.id, lessonId },
+      relations: ['lessons'],
+    });
+    return lessons;
+  }
+
   async addLessonVideo(payload: AddVideoLesson): Promise<LessonVideo> {
     const VideolessonExist = await this.getLessonVideoByName(payload.name);
 
@@ -73,7 +105,7 @@ export class LessonService {
   async getLessonById(id: string): Promise<Lesson> {
     const lesson = await this.lessonRepository.findOne({
       where: { id },
-      relations: ['videos', 'notes'],
+      relations: ['videos'],
     });
 
     if (!lesson) {

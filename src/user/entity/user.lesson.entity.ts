@@ -29,8 +29,8 @@ export class UserLesson {
   })
   userId: string;
 
-  @OneToMany(() => Lesson, (lesson) => lesson.id)
-  lesson: Lesson[];
+  @OneToMany(() => Lesson, (lesson) => lesson.userLesson)
+  lessons: Lesson[];
 
   @ManyToOne(() => User, (user) => user.id, {
     eager: true,
