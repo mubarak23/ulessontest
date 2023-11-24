@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -34,6 +35,7 @@ export class UserLesson {
   @ManyToOne(() => User, (user) => user.id, {
     eager: true,
   })
+  @JoinColumn()
   user: User;
 
   @CreateDateColumn()

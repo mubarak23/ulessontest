@@ -33,7 +33,7 @@ export class Lesson {
   })
   numberofVideo: number;
 
-  @OneToMany(() => LessonVideo, (video) => video.id)
+  @OneToMany(() => LessonVideo, (video) => video.lesson)
   videos: LessonVideo[];
 
   @OneToMany(() => Note, (note) => note.user)
