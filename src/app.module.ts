@@ -17,6 +17,9 @@ import { LessonModule } from './lesson/lesson.module';
 import { Note } from './note/entity/note.entity';
 import { NoteController } from './note/note.controller';
 import { NoteModule } from './note/note.module';
+import { Quiz } from './quiz/entity/quiz.entity';
+import { UserQuiz } from './quiz/entity/user-quiz.entity';
+import { QuizModule } from './quiz/quiz.module';
 import { UserLesson } from './user/entity/user.lesson.entity';
 
 @Module({
@@ -32,7 +35,15 @@ import { UserLesson } from './user/entity/user.lesson.entity';
           username: configService.get('DB_USERNAME'),
           password: configService.get('DB_PASSWORD'),
           database: configService.get('DB_DATABASE'),
-          entities: [User, Lesson, LessonVideo, UserLesson, Note],
+          entities: [
+            User,
+            Lesson,
+            LessonVideo,
+            UserLesson,
+            Note,
+            Quiz,
+            UserQuiz,
+          ],
           synchronize: true,
         } as TypeOrmModuleAsyncOptions;
       },
@@ -42,6 +53,7 @@ import { UserLesson } from './user/entity/user.lesson.entity';
     UserModule,
     LessonModule,
     NoteModule,
+    QuizModule,
   ],
   controllers: [AppController, NoteController],
   providers: [AppService],

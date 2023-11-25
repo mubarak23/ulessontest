@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Note } from 'src/note/entity/note.entity';
+import { Quiz } from 'src/quiz/entity/quiz.entity';
 import { UserLesson } from 'src/user/entity/user.lesson.entity';
 import {
   Column,
@@ -47,6 +48,11 @@ export class Lesson {
 
   @OneToMany(() => Note, (note) => note.user)
   notes: Note[];
+
+  @OneToMany(() => Quiz, (quiz) => quiz.lesson)
+  quizes: Quiz[];
+
+  // quizzes
 
   @CreateDateColumn()
   createdDate: Date;

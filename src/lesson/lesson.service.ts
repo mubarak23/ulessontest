@@ -105,7 +105,7 @@ export class LessonService {
   async getLessonById(id: string): Promise<Lesson> {
     const lesson = await this.lessonRepository.findOne({
       where: { id },
-      relations: ['videos'],
+      relations: ['videos', 'quizes'],
     });
 
     if (!lesson) {

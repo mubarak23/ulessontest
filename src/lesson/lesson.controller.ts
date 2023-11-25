@@ -34,8 +34,8 @@ export class LessonController {
     @Param('lessonId') lessonId: string,
   ): Promise<Lesson> {
     const lesson = await this.lessonService.getLessonById(lessonId);
-    console.log('video', lesson.videos);
-    return res.status(201).json({ data: lesson });
+
+    return res.status(200).json({ data: lesson });
   }
 
   @Post('create')

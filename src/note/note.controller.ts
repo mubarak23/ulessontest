@@ -88,7 +88,7 @@ export class NoteController {
   @UseGuards(AuthGuard())
   @Delete('/:id')
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'Delete  Note',
     type: NoteResponse,
   })
@@ -102,14 +102,14 @@ export class NoteController {
   ): Promise<NoteResponse> {
     const note = await this.noteService.getNoteById(req.user.id, id);
     await this.noteService.deleteNoteById(req.user.id, note.id);
-    return res.status(201).json({ data: true });
+    return res.status(200).json({ data: true });
   }
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard())
   @Patch('/:id')
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'Successful Add Lesson Note',
     type: NoteResponse,
   })
@@ -129,6 +129,6 @@ export class NoteController {
       note.id,
       payload.content,
     );
-    return res.status(201).json({ data: true });
+    return res.status(200).json({ data: true });
   }
 }
