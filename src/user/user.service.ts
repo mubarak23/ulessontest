@@ -12,7 +12,7 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async get(id: string) {
+  async get(id: string): Promise<User> {
     return await this.userRepository.findOne({ where: { id } });
   }
 

@@ -51,7 +51,7 @@ export class LessonService {
 
   async myLessonExist(user: User, lessonId: string): Promise<UserLesson> {
     const userlesson = await this.userlessonRepository.findOne({
-      where: { userId: user.id, lessonId },
+      where: { userId: user.id, lessonId: lessonId },
     });
     if (!userlesson) {
       throw new UnprocessableEntityException('Lesson Not Assign by user');
@@ -75,6 +75,15 @@ export class LessonService {
       relations: ['lessons'],
     });
     return lessons;
+  }
+
+  async numberOfLessonTaken(userId: string): Promise<any> {
+    const lessons = await this.userlessonRepository.find({
+      where: { userId },
+    });
+    if (lessons) {
+      return lessons.length;
+    }
   }
 
   async addLessonVideo(payload: AddVideoLesson): Promise<LessonVideo> {

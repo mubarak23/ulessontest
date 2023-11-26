@@ -40,7 +40,7 @@ export class QuizService {
 
   async getQuiz(id: string): Promise<Quiz> {
     const lessonQuizExist = await this.quizRepository.findOne({
-      where: { id },
+      where: { id: id },
     });
     if (!lessonQuizExist) {
       throw new UnprocessableEntityException('Quiz Does Not Exist');
@@ -53,6 +53,36 @@ export class QuizService {
       where: { lessonId },
     });
     return lessonQuizs;
+  }
+
+  async getLessonQuizById(id: string, lessonId: string): Promise<Quiz> {
+    const lessonQuiz = await this.quizRepository.findOne({
+      where: { id, lessonId },
+    });
+    if (!lessonQuiz) {
+      throw new UnprocessableEntityException('Lesson Quiz Does Not Exist');
+    }
+    return lessonQuiz;
+  }
+
+  async getQuizTakenByUser(
+    userId: string,
+    lessonId: string,
+  ): Promise<UserQuiz[]> {
+    const lessonQuizTaken = await this.userQuizRepository.find({
+      where: { userId, lessonId },
+    });
+
+    return lessonQuizTaken;
+  }
+
+  async numberOfQuizeTaken(userId: string): Promise<any> {
+    const quiz = await this.userQuizRepository.find({
+      where: { userId },
+    });
+    if (quiz) {
+      return quiz.length;
+    }
   }
 
   async getQuizze(): Promise<Quiz[]> {

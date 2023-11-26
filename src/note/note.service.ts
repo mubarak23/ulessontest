@@ -86,6 +86,15 @@ export class NoteService {
     return true;
   }
 
+  async numberOfNoteTaken(userId: string): Promise<any> {
+    const notes = await this.noteRepository.find({
+      where: { userId },
+    });
+    if (notes) {
+      return notes.length;
+    }
+  }
+
   async getLessonNoteById(id: string, userId: string): Promise<Note> {
     const note = await this.noteRepository.findOne({
       where: { id, userId },
