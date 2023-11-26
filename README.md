@@ -57,39 +57,39 @@ response sample
 # user's note on lesson video response
 
 - route -> /note, GET Request, Protected
-<!-- {
+  {
   "data": [
-    {
-      "id": "1709c229-5372-40b9-9a5e-d561e5a6ee66",
-      "content": "note contents",
-      "videotime": "34:45",
-      "lessonvideoId": null,
-      "lessonId": "b35cd1b9-8ee5-4112-823a-d7e4df2ab648",
-      "userId": "08994f09-fc31-4e87-b937-24e7038ed68c",
-      "createdDate": "2023-11-24T07:54:24.227Z",
-      "updatedDate": "2023-11-24T19:11:50.739Z",
-      "deletedDate": null,
-      "user": {
-        "id": "08994f09-fc31-4e87-b937-24e7038ed68c",
-        "email": "demo1@gmail.com",
-        "firstName": "spark",
-        "lastName": "Doe",
-        "otherName": "John",
-        "isEmailVerified": false,
-        "createdDate": "2023-11-22T13:50:21.149Z",
-        "updatedDate": "2023-11-22T13:50:21.149Z",
-        "deletedDate": null
-      },
-      "lesson": {
-        "id": "b35cd1b9-8ee5-4112-823a-d7e4df2ab648",
-        "name": "non metals",
-        "description": "demo description of the lesson",
-        "numberofVideo": 5,
-        "createdDate": "2023-11-22T22:24:41.879Z",
-        "updatedDate": "2023-11-22T22:24:41.879Z",
-        "deletedDate": null,
-        "userLesson": null
-      }
-    }
+  {
+  "id": "1709c229-5372-40b9-9a5e-d561e5a6ee66",
+  "content": "note contents",
+  "videotime": "34:45",
+  "lessonvideoId": null,
+  "lessonId": "b35cd1b9-8ee5-4112-823a-d7e4df2ab648",
+  "userId": "08994f09-fc31-4e87-b937-24e7038ed68c",
+  "createdDate": "2023-11-24T07:54:24.227Z",
+  "updatedDate": "2023-11-24T19:11:50.739Z",
+  "deletedDate": null,
+  "user": {
+  "id": "08994f09-fc31-4e87-b937-24e7038ed68c",
+  "email": "demo1@gmail.com",
+  "firstName": "spark",
+  "lastName": "Doe",
+  "otherName": "John",
+  "isEmailVerified": false,
+  "createdDate": "2023-11-22T13:50:21.149Z",
+  "updatedDate": "2023-11-22T13:50:21.149Z",
+  "deletedDate": null
+  },
+  "lesson": {
+  "id": "b35cd1b9-8ee5-4112-823a-d7e4df2ab648",
+  "name": "non metals",
+  "description": "demo description of the lesson",
+  "numberofVideo": 5,
+  "createdDate": "2023-11-22T22:24:41.879Z",
+  "updatedDate": "2023-11-22T22:24:41.879Z",
+  "deletedDate": null,
+  "userLesson": null
+  }
+  }
   ]
-} -->
+  }
