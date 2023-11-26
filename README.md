@@ -56,6 +56,7 @@ response sample
 
 # user's note on lesson video response
 
+```
 - route -> /note, GET Request, Protected
   {
   "data": [
@@ -93,3 +94,4 @@ response sample
   }
   ]
   }
+```
