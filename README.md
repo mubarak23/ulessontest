@@ -10,6 +10,8 @@ $ npm install
 
 ## Setup .env file
 
+```
+
 APP_ENV=development
 PORT=
 SENTRY_DNS=
@@ -21,6 +23,8 @@ DB_PASSWORD=
 DB_DATABASE=
 JWT_SECRET_KEY=
 JWT_EXPIRATION_TIME=
+
+```
 
 ## Running the app
 
