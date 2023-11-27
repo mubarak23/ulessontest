@@ -143,6 +143,8 @@ export class UserController {
     return res.status(200).json({ data: lessonQuiz });
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard())
   @Post('take-lesson')
   @ApiResponse({
     status: 201,
@@ -157,8 +159,9 @@ export class UserController {
     @Req() req,
     @Res() res,
   ): Promise<LessonVideoResponse> {
-    await this.lessonService.getLessonById(payload.lessonId);
-    await this.lessonService.myLessonExist(req.user, payload.lessonId);
+    const lesson = await this.lessonService.getLessonById(payload.lessonId);
+
+    await this.lessonService.myLessonExist(req.user, lesson.id);
     const addLessonVideo = await this.lessonService.addUserLesson(
       req.user,
       payload,
@@ -183,13 +186,12 @@ export class UserController {
     @Res() res,
   ): Promise<TakeQuizesponse> {
     await this.lessonService.getLessonById(payload.lessonId);
-    const lesson = await this.lessonService.myLessonExist(
-      req.user,
-      payload.lessonId,
-    );
+    await this.lessonService.myLessonExist(req.user, payload.lessonId);
+    const lesson = await this.lessonService.getLessonById(payload.lessonId);
+
     const quiz = await this.quizeService.getQuiz(payload.quizId);
 
-    await this.quizeService.getLessonQuizById(quiz.id, lesson.lessonId);
+    await this.quizeService.getLessonQuizById(quiz.id, lesson.id);
     const takeLessonQuiz = await this.quizeService.takeLessonQuiz(
       req.user,
       payload,

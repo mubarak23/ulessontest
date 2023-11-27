@@ -49,15 +49,14 @@ export class LessonService {
     return lessonExist;
   }
 
-  async myLessonExist(user: User, lessonId: string): Promise<UserLesson> {
+  async myLessonExist(user: User, lessonId: string): Promise<boolean> {
     const userlesson = await this.userlessonRepository.findOne({
       where: { userId: user.id, lessonId: lessonId },
     });
     if (!userlesson) {
-      throw new UnprocessableEntityException('Lesson Not Assign by user');
+      return false;
     }
-
-    return userlesson;
+    throw new UnprocessableEntityException('Lesson Taken by user');
   }
 
   async myLessons(user: User): Promise<UserLesson[]> {
